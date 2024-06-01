@@ -11,50 +11,77 @@ def main():
 
     # The Main Program.
 
-    from tkinter import Tk, ttk  
+    from tkinter import Tk, ttk, messagebox  
 
-    window = Tk()
-    window.title("Notepad")
-    window.geometry("800x400")
-    window.update()
-    on_window_open(window)
+    mainwindow = Tk()
+    mainwindow.title("Untitled - Notepad")
+    mainwindow.geometry("800x400")
+    mainwindow.update()
+    on_window_open(mainwindow)
 
     # Debug information
-    print(str(window.winfo_geometry()))
+    print(str(mainwindow.winfo_geometry()))
 
     # Handle Program Window Exit.
 
     def on_closing():
-        with open('notepad_user_settings_last_window_geometry.txt', 'w') as file: 
-            file.write(str(window.winfo_geometry()))
+        with open('notepad_user_settings_last_mainwindow_geometry.txt', 'w') as file: 
+            file.write(str(mainwindow.winfo_geometry()))
         print("closing")
 
     def on_exit():
         on_closing()
-        window.destroy()
+        mainwindow.destroy()
 
-    window.protocol("WM_DELETE_WINDOW", on_exit)
+    mainwindow.protocol("WM_DELETE_WINDOW", on_exit)
 
     # User Interface
 
-    frame = ttk.Frame(window, padding=10)
+    frame = ttk.Frame(mainwindow, padding=10)
     frame.grid()
     ttk.Label(frame, text="Hello World!").grid(column=0, row=0)
     ttk.Button(frame, text="Quit", command=on_exit).grid(column=1, row=0)
 
+    def donothing():
+        pass
 
+    def about():
+        messagebox.showinfo("About", "Notepad running on TkInter " +  str(tkinter.TkVersion) + "\nPublic Domain Laboratories")
+
+    menubar = tkinter.Menu(mainwindow)
+    menufile = tkinter.Menu(menubar, tearoff=0)
+    menufile.add_command(label="New", command=donothing, accelerator="Ctrl+N")
+    menufile.add_command(label="New Window", command=donothing, accelerator="Ctrl+Shift+N")
+    menufile.add_command(label="Open", command=donothing, accelerator="Ctrl+O")
+    menufile.add_command(label="Save", command=donothing, accelerator="Ctrl+S")
+    menufile.add_command(label="Save As", command=donothing, accelerator="Ctrl+Shift+S")
+    menufile.add_separator()
+    menufile.add_command(label="Page Setup", command=donothing)
+    menufile.add_command(label="Print", command=donothing, accelerator="Ctrl+P")
+    menufile.add_separator()
+    menufile.add_command(label="Exit", command=mainwindow.quit)
+    menubar.add_cascade(label="File", menu=menufile)
+
+    menuhelp = tkinter.Menu(menubar, tearoff=0)
+    menuhelp.add_command(label="View Help", command=donothing)
+    menuhelp.add_command(label="Send Feedback", command=donothing)
+    menuhelp.add_separator()
+    menuhelp.add_command(label="About Notepad", command=about, accelerator="Ctrl+i")
+    menubar.add_cascade(label="Help", menu=menuhelp, accelerator="Ctrl+H")
+    
+    mainwindow.config(menu=menubar)
 
     # Start of the Program
-    window.mainloop()
+    mainwindow.mainloop()
 
-def on_window_open(window):
+def on_window_open(mainwindow):
     import os
-    if os.path.exists('notepad_user_settings_last_window_geometry.txt'):
-        window.geometry(open('notepad_user_settings_last_window_geometry.txt').read())
+    if os.path.exists('notepad_user_settings_last_mainwindow_geometry.txt'):
+        mainwindow.geometry(open('notepad_user_settings_last_mainwindow_geometry.txt').read())
+        mainwindow.update()
         print("Window has been opened!")
         
 if __name__=="__main__":
-
 
     import argparse
 
