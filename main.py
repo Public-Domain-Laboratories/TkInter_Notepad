@@ -2,49 +2,52 @@
 from ctypes import windll
 windll.shcore.SetProcessDpiAwareness(1)
 
-import os
-import argparse
+import tkinter
+print("TkVersion:", tkinter.TkVersion)
 
-import tkinter as tk
-from tkinter import ttk
+from tkinter import Tk, ttk  
 
-
-def on_closing():
-    with open('notepad_user_settings_last_window_geometry.txt', 'w') as file:
-        window.update()
-        file.write(f"{window.winfo_width()}x{window.winfo_height()}")
-        print("Closing")
-        print(f"{window.winfo_reqwidth()}x{window.winfo_reqheight()}")
-        print(f"{window.winfo_width()}x{window.winfo_height()}")
-    window.destroy()
-
-def on_window_open(event):
-    if os.path.exists('notepad_user_settings_last_window_geometry.txt'):
-        with open('notepad_user_settings_last_window_geometry.txt', 'r') as file:
-            geometry = file.read()
-            window.geometry(geometry)
-            window.update()
-            print("Window has been opened!")
-    else:
-        print("No previous settings found.")
-
-# Create main application window
-window = tk.Tk()
+window = Tk()
 window.title("Notepad")
 window.geometry("800x400")
+window.update()
+print(str(window.winfo_reqwidth()) + "x" + str(window.winfo_reqheight()))
+print(str(window.winfo_width ()) + "x" + str(window.winfo_height ()))
 
-# Bind the '<Map>' event to the on_window_open function
-window.bind('<Map>', on_window_open)
+def on_closing():
+    with open('notepad_user_settings_last_window_geometry.txt', 'w') as file: 
+        window.update()
+        file.write(str(window.winfo_width ()) + "x" + str(window.winfo_height ()) )
+        print("closing")
+        print(str(window.winfo_reqwidth()) + "x" + str(window.winfo_reqheight()))
+        print(str(window.winfo_width ()) + "x" + str(window.winfo_height ()))
+    # notepad_user_settings_last_window_position
 
-# Define the protocol for the window close button
-window.protocol("WM_DELETE_WINDOW", on_closing)
+def on_exit():
+    on_closing()
+    window.destroy()
 
-# Create a simple UI
+window.protocol("WM_DELETE_WINDOW", on_exit)
+
+def on_window_open(window):
+    import os
+    if os.path.exists('notepad_user_settings_last_window_geometry.txt'):
+        window.geometry(open('notepad_user_settings_last_window_geometry.txt').read())
+        window.update()
+        print("Window has been opened!")
+window.bind('<Map>', on_window_open(window))
+
+
+import argparse
+
+# If Notepad is installed on the system, look up previous settings.
+# system-wide user settings path: c:\Program Files\application-name
+
+
 frame = ttk.Frame(window, padding=10)
 frame.grid()
-
 ttk.Label(frame, text="Hello World!").grid(column=0, row=0)
-ttk.Button(frame, text="Quit", command=on_closing).grid(column=1, row=0)
-
-# Start the Tkinter event loop
+ttk.Button(frame, text="Quit", command=on_exit).grid(column=1, row=0)
 window.mainloop()
+
+
