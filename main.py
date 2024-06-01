@@ -2,10 +2,12 @@
 from ctypes import windll
 windll.shcore.SetProcessDpiAwareness(1)
 
-import tkinter as tk
-from tkinter import ttk
 import os
 import argparse
+
+import tkinter as tk
+from tkinter import ttk
+
 
 def on_closing():
     with open('notepad_user_settings_last_window_geometry.txt', 'w') as file:
