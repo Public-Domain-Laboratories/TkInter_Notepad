@@ -16,17 +16,20 @@ def main():
     window = Tk()
     window.title("Notepad")
     window.geometry("800x400")
+    window.update()
     on_window_open(window)
 
     # Debug information
-    print(str(window.winfo_width ()) + "x" + str(window.winfo_height ()))
+    print(str(window.winfo_geometry()))
 
 
     # Handle Program Window Exit.
 
     def on_closing():
         with open('notepad_user_settings_last_window_geometry.txt', 'w') as file: 
-            file.write(str(window.winfo_width ()) + "x" + str(window.winfo_height ()))
+            file.write(str(window.winfo_geometry()))
+        #with open('notepad_user_settings_last_window_position.txt', 'w') as file: 
+        #    file.write(str(window.winfo_width ()) + "x" + str(window.winfo_height ()))
         print("closing")
         # notepad_user_settings_last_window_position
 
