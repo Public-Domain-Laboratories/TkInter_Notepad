@@ -66,7 +66,7 @@ if __name__=="__main__":
     parser = argparse.ArgumentParser(description='A Notepad program.')
 
     # Add the arguments
-    parser.add_argument('filename', type=str, help='the name of the file')
+    parser.add_argument('-filename', type=str, help='the name of the file')
     parser.add_argument('-v', '--verbose', action='store_true', help='increase output verbosity')
 
     # Parse the arguments
