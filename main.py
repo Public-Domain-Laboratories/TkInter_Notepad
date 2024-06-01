@@ -20,11 +20,12 @@ def on_closing():
         print("closing")
         print(str(window.winfo_reqwidth()) + "x" + str(window.winfo_reqheight()))
         print(str(window.winfo_width ()) + "x" + str(window.winfo_height ()))
-        
-window.protocol("WM_DELETE_WINDOW", on_closing)
+
 def on_exit():
     on_closing()
     window.destroy()
+
+window.protocol("WM_DELETE_WINDOW", on_exit)
 
 def on_window_open(window):
     window.geometry(open('notepad_user_settings_window_geometry.txt').read())
