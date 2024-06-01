@@ -1,8 +1,12 @@
 from tkinter import Tk, ttk
 
-root = Tk()
-frm = ttk.Frame(root, padding=10)
-frm.grid()
-ttk.Label(frm, text="Hello World!").grid(column=0, row=0)
-ttk.Button(frm, text="Quit", command=root.destroy).grid(column=1, row=0)
-root.mainloop()
+app = Tk()
+app.title("Notepad")
+app.maxsize(1000, 400)
+
+
+frame = ttk.Frame(app, padding=10)
+frame.grid()
+ttk.Label(frame, text="Hello World!").grid(column=0, row=0)
+ttk.Button(frame, text="Quit", command=app.destroy).grid(column=1, row=0)
+app.mainloop()
