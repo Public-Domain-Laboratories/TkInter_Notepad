@@ -14,7 +14,7 @@ print(str(window.winfo_reqwidth()) + "x" + str(window.winfo_reqheight()))
 print(str(window.winfo_width ()) + "x" + str(window.winfo_height ()))
 
 def on_closing():
-    with open('notepad_user_settings_window_geometry.txt', 'w') as file: 
+    with open('notepad_user_settings_last_window_geometry.txt', 'w') as file: 
         window.update()
         file.write(str(window.winfo_width ()) + "x" + str(window.winfo_height ()) )
         print("closing")
@@ -28,9 +28,11 @@ def on_exit():
 window.protocol("WM_DELETE_WINDOW", on_exit)
 
 def on_window_open(window):
-    window.geometry(open('notepad_user_settings_window_geometry.txt').read())
-    window.update()
-    print("Window has been opened!")
+    import os
+    if os.path.exists('notepad_user_settings_last_window_geometry.txt'):
+        window.geometry(open('notepad_user_settings_last_window_geometry.txt').read())
+        window.update()
+        print("Window has been opened!")
 window.bind('<Map>', on_window_open(window))
 
 
