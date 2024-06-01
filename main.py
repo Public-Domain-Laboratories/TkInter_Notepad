@@ -20,6 +20,7 @@ def on_closing():
         print("closing")
         print(str(window.winfo_reqwidth()) + "x" + str(window.winfo_reqheight()))
         print(str(window.winfo_width ()) + "x" + str(window.winfo_height ()))
+    # notepad_user_settings_last_window_position
 
 def on_exit():
     on_closing()
