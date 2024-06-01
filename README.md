@@ -6,6 +6,7 @@ https://tkdocs.com/shipman/
 
 ## Requirements:  
 ### Python Environment
+A regular Python installation is enough for this project to work.
 #### Windows Embeddable Package
 This is the minimal requirement for this project to work.  
 At the very least [The embeddable package](https://docs.python.org/3.7/using/windows.html#the-embeddable-package) is required.  
