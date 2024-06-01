@@ -18,7 +18,7 @@ Example file name of the download: `python-3.12.3-embed-amd64.zip`
 Size after extraction: ~20MB  
 
 
-## Ideas
+## TODO Ideas
 
 ```
     # Handle Command Line Interface
