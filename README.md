@@ -16,3 +16,12 @@ At the very least [The embeddable package](https://docs.python.org/3.7/using/win
 
 Example file name of the download: `python-3.12.3-embed-amd64.zip`  
 Size after extraction: ~20MB  
+
+
+## Ideas
+
+```
+    # Handle Command Line Interface
+        # main --install 
+        # Installs the program to store per-user or system-wide settings.
+```
