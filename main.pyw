@@ -28,10 +28,7 @@ def main():
     def on_closing():
         with open('notepad_user_settings_last_window_geometry.txt', 'w') as file: 
             file.write(str(window.winfo_geometry()))
-        #with open('notepad_user_settings_last_window_position.txt', 'w') as file: 
-        #    file.write(str(window.winfo_width ()) + "x" + str(window.winfo_height ()))
         print("closing")
-        # notepad_user_settings_last_window_position
 
     def on_exit():
         on_closing()
