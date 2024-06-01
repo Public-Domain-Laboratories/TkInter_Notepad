@@ -39,13 +39,6 @@ def main():
 
 
 
-    # Handle Command Line Interface
-        # main --install 
-        # Installs the program to store per-user or system-wide settings.
-    import argparse
-
-    # If Notepad is installed on the system, look up previous settings.
-    # system-wide user settings path: c:\Program Files\application-name
 
     # User Interface
 
@@ -63,4 +56,30 @@ def on_window_open(window):
         print("Window has been opened!")
         
 if __name__=="__main__":
+
+    # Handle Command Line Interface
+        # main --install 
+        # Installs the program to store per-user or system-wide settings.
+    import argparse
+
+    # Create the parser
+    parser = argparse.ArgumentParser(description='A Notepad program.')
+
+    # Add the arguments
+    parser.add_argument('filename', type=str, help='the name of the file')
+    parser.add_argument('-v', '--verbose', action='store_true', help='increase output verbosity')
+
+    # Parse the arguments
+    args = parser.parse_args()
+   
+    # Use the arguments
+    print(f'Filename: {args.filename}')
+    if args.verbose:
+        print('Verbosity turned on')
+    else:
+        print('Verbosity turned off')
+
+    # If Notepad is installed on the system, look up previous settings.
+    # system-wide user settings path: c:\Program Files\application-name
+
     main()
