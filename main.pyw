@@ -22,7 +22,6 @@ def main():
     # Debug information
     print(str(window.winfo_geometry()))
 
-
     # Handle Program Window Exit.
 
     def on_closing():
@@ -36,10 +35,6 @@ def main():
 
     window.protocol("WM_DELETE_WINDOW", on_exit)
 
-
-
-
-
     # User Interface
 
     frame = ttk.Frame(window, padding=10)
@@ -47,6 +42,9 @@ def main():
     ttk.Label(frame, text="Hello World!").grid(column=0, row=0)
     ttk.Button(frame, text="Quit", command=on_exit).grid(column=1, row=0)
 
+
+
+    # Start of the Program
     window.mainloop()
 
 def on_window_open(window):
@@ -57,9 +55,7 @@ def on_window_open(window):
         
 if __name__=="__main__":
 
-    # Handle Command Line Interface
-        # main --install 
-        # Installs the program to store per-user or system-wide settings.
+
     import argparse
 
     # Create the parser
