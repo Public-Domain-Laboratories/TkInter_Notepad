@@ -1,4 +1,7 @@
-from tkinter import Tk, ttk
+import tkinter
+print("TkVersion:", tkinter.TkVersion)
+
+from tkinter import Tk, ttk  
 
 window = Tk()
 window.title("Notepad")
