@@ -43,7 +43,7 @@ def main():
     # MenuBar
 
 
-    def about(callback):
+    def about(event=None):
         messagebox.showinfo("About", "Notepad running on TkInter " +  str(tkinter.TkVersion) + "\nPublic Domain Laboratories")
 
     menubar = tkinter.Menu(mainwindow)
@@ -75,7 +75,7 @@ def main():
     menuhelp.add_command(
         label="Send Feedback", command=None)
     menuhelp.add_separator()
-    menuhelp.add_command(label="About Notepad", command=lambda: about(None), accelerator="Ctrl+i") #FIX: about() triggers function to execute immediately, need to pass Null
+    menuhelp.add_command(label="About Notepad", command=about, accelerator="Ctrl+i") #FIX: about() triggers function to execute immediately, need to pass Null
     menubar.bind_all('<Control-i>', about)
     menubar.add_cascade(
         label="Help", menu=menuhelp, accelerator="Ctrl+H")
