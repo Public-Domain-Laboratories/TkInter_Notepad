@@ -1,3 +1,6 @@
+Issues: 
+* Multiline text selection is not working properly: selection highlight also covers the non-whitespace areas.
+
 [Work in progress]
 
 References:  
