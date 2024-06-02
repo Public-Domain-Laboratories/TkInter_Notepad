@@ -35,13 +35,45 @@ def main():
     mainwindow.protocol("WM_DELETE_WINDOW", on_exit)
 
     # User Interface
-    frame = ttk.Frame(mainwindow, padding=10)
-    frame.grid()
-    ttk.Label(frame, text="Hello World!").grid(column=0, row=0)
-    ttk.Button(frame, text="Quit", command=on_exit).grid(column=1, row=0)
-    ttk.Scrollbar(frame, command=None)
-    # MenuBar
 
+    frame = ttk.Frame(mainwindow, padding=0)
+    frame.grid(sticky=(tkinter.N, tkinter.S, tkinter.E, tkinter.W))
+
+    # Configure mainwindow grid
+    mainwindow.columnconfigure(0, weight=1)
+    mainwindow.rowconfigure(0, weight=1)
+
+    # Text widget
+    editortextwidget = tkinter.Text(frame, wrap='none', font="Segoe 10")
+    editortextwidget.grid(row=1, column=0, columnspan=2, sticky=(tkinter.N, tkinter.S, tkinter.E, tkinter.W), padx=0, pady=0)
+
+    # Create vertical scrollbar and link it to the text widget
+    verticalscrollbar = ttk.Scrollbar(frame, command=editortextwidget.yview)
+    verticalscrollbar.grid(row=1, column=2, sticky=(tkinter.N, tkinter.S))
+    editortextwidget.config(yscrollcommand=verticalscrollbar.set)
+
+    # Create horizontal scrollbar and link it to the text widget
+    horizontalscrollbar = ttk.Scrollbar(frame, orient="horizontal", command=editortextwidget.xview)
+    horizontalscrollbar.grid(row=2, column=0, columnspan=2, sticky=(tkinter.E, tkinter.W))
+    editortextwidget.config(xscrollcommand=horizontalscrollbar.set)
+
+    frame.columnconfigure(0, weight=1)
+    frame.rowconfigure(1, weight=1)
+
+
+  # Bind double-click event to the text widget
+    def select_line_to_end(event):
+        editortextwidget.tag_remove("sel", "1.0", "end")
+        cursor_position = editortextwidget.index(tkinter.INSERT)
+        line_start = f"{cursor_position} linestart"
+        line_end = f"{cursor_position} lineend"
+        editortextwidget.tag_add("sel", line_start, line_end)
+        return "break"
+
+    editortextwidget.bind("<Double-1>", select_line_to_end)
+
+
+    # MenuBar
 
     def about(event):
         messagebox.showinfo("About", "Notepad running on TkInter " +  str(tkinter.TkVersion) + "\nPublic Domain Laboratories")
