@@ -1,4 +1,3 @@
-
 def main():
     # Resolve text bluryness on Windows Operating System.
     from ctypes import windll
@@ -36,38 +35,50 @@ def main():
     mainwindow.protocol("WM_DELETE_WINDOW", on_exit)
 
     # User Interface
-
     frame = ttk.Frame(mainwindow, padding=10)
     frame.grid()
     ttk.Label(frame, text="Hello World!").grid(column=0, row=0)
     ttk.Button(frame, text="Quit", command=on_exit).grid(column=1, row=0)
+    ttk.Scrollbar(frame, command=None)
+    # MenuBar
 
-    def donothing():
-        pass
 
-    def about():
+    def about(callback):
         messagebox.showinfo("About", "Notepad running on TkInter " +  str(tkinter.TkVersion) + "\nPublic Domain Laboratories")
 
     menubar = tkinter.Menu(mainwindow)
     menufile = tkinter.Menu(menubar, tearoff=0)
-    menufile.add_command(label="New", command=donothing, accelerator="Ctrl+N")
-    menufile.add_command(label="New Window", command=donothing, accelerator="Ctrl+Shift+N")
-    menufile.add_command(label="Open", command=donothing, accelerator="Ctrl+O")
-    menufile.add_command(label="Save", command=donothing, accelerator="Ctrl+S")
-    menufile.add_command(label="Save As", command=donothing, accelerator="Ctrl+Shift+S")
+    menufile.add_command(
+        label="New", command=None, accelerator="Ctrl+N")
+    menufile.add_command(
+        label="New Window", command=None, accelerator="Ctrl+Shift+N")
+    menufile.add_command(
+        label="Open", command=None, accelerator="Ctrl+O")
+    menufile.add_command(
+        label="Save", command=None, accelerator="Ctrl+S")
+    menufile.add_command(
+        label="Save As", command=None, accelerator="Ctrl+Shift+S")
     menufile.add_separator()
-    menufile.add_command(label="Page Setup", command=donothing)
-    menufile.add_command(label="Print", command=donothing, accelerator="Ctrl+P")
+    menufile.add_command(
+        label="Page Setup", command=None)
+    menufile.add_command(
+        label="Print", command=None, accelerator="Ctrl+P")
     menufile.add_separator()
-    menufile.add_command(label="Exit", command=mainwindow.quit)
-    menubar.add_cascade(label="File", menu=menufile)
+    menufile.add_command(
+        label="Exit", command=mainwindow.quit)
+    menubar.add_cascade(
+        label="File", menu=menufile)
 
     menuhelp = tkinter.Menu(menubar, tearoff=0)
-    menuhelp.add_command(label="View Help", command=donothing)
-    menuhelp.add_command(label="Send Feedback", command=donothing)
+    menuhelp.add_command(
+        label="View Help", command=None)
+    menuhelp.add_command(
+        label="Send Feedback", command=None)
     menuhelp.add_separator()
-    menuhelp.add_command(label="About Notepad", command=about, accelerator="Ctrl+i")
-    menubar.add_cascade(label="Help", menu=menuhelp, accelerator="Ctrl+H")
+    menuhelp.add_command(label="About Notepad", command=lambda: about(None), accelerator="Ctrl+i") #FIX: about() triggers function to execute immediately, need to pass Null
+    menubar.bind_all('<Control-i>', about)
+    menubar.add_cascade(
+        label="Help", menu=menuhelp, accelerator="Ctrl+H")
     
     mainwindow.config(menu=menubar)
 
