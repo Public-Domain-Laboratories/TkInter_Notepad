@@ -10,7 +10,7 @@ def main():
 
     # The Main Program.
 
-    from tkinter import Tk, ttk, messagebox  
+    from tkinter import Tk, ttk, messagebox, font  
 
     mainwindow = Tk()
     mainwindow.title("Untitled - Notepad")
@@ -44,7 +44,8 @@ def main():
     mainwindow.rowconfigure(0, weight=1)
 
     # Text widget
-    editortextwidget = tkinter.Text(frame, wrap='none', font="Segoe 10", insertwidth=1, insertofftime=300, insertontime=600)
+    font = font.Font(family="Segoe UI", size=11, weight="normal")
+    editortextwidget = tkinter.Text(frame, wrap='none', font=font, insertwidth=1, insertofftime=300, insertontime=600)
     editortextwidget.grid(row=1, column=0, columnspan=2, sticky=(tkinter.N, tkinter.S, tkinter.E, tkinter.W), padx=0, pady=0)
 
     # Create vertical scrollbar and link it to the text widget
